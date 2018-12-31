@@ -22,7 +22,7 @@ minecraft {
     
     mappings = "stable_39"
 
-    replace "@INJECT_VERSION", project.version
+    replace "@INJECT_VERSION@", project.version
 }
 
 jar {
