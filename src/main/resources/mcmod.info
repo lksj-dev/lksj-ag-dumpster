@@ -1,0 +1,14 @@
+[
+  {
+    "modid": "dumpster",
+    "name": "Dumpster",
+    "description": "Void unwanted stuff into black hole, in an efficient manner",
+    "version": "${version}",
+    "url" : "https://github.com/Team-AbCiv/Dumpster",
+    "authorList": [ "3TUSK" ],
+    "credits": "wormz (wormzjl) for his requests of making this thing",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": ""
+  }
+]

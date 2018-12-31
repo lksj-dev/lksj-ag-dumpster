@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+version = "0.1.0"
+group = "info.tritusk.modpack.toolkit"
+archivesBaseName = "Dumpster"
+
+minecraft {
+    version = "1.12.2-14.23.5.2772"
+    runDir = "run"
+    
+    mappings = "stable_39"
+
+    replace "@INJECT_VERSION", project.version
+}
+
+jar {
+    manifest {
+        attributes 'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}"
+        attributes 'Timestamp': System.currentTimeMillis()
+    }
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        expand 'version':project.version
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
