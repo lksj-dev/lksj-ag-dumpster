@@ -1,6 +1,7 @@
 package info.tritusk.dumpster;
 
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.FluidTankProperties;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
@@ -10,6 +11,12 @@ public final class VoidingFluidHandler implements IFluidHandler {
 
     public static final VoidingFluidHandler INSTANCE = new VoidingFluidHandler();
 
+    private static final IFluidTankProperties[] TANK_PROPERTIES;
+
+    static {
+        TANK_PROPERTIES = new IFluidTankProperties[] { new FluidTankProperties(null, Integer.MAX_VALUE, true, false)};
+    }
+
     private VoidingFluidHandler() {
         // No-op. What else can we do here?
     }
@@ -18,14 +25,36 @@ public final class VoidingFluidHandler implements IFluidHandler {
      * {@inheritDoc}
      *
      * @implSpec
-     * As a {@code VoidingFluidHandler}, there is effectively nothing
-     * stored in the handler, so an empty array will always be returned.
+     * As a {@code VoidingFluidHandler}, although this effectively stores no
+     * fluid, for sake of precisely reflecting its properties, this will return
+     * an array with only one element, and that IFluidTankProperties will have
+     * the following behaviors:
+     * <ul>
+     *     <li>
+     *         {@link IFluidTankProperties#getContents()} always returns {@code null}.
+     *     </li>
+     *     <li>
+     *         {@link IFluidTankProperties#getCapacity()} always returns {@link
+     *         Integer#MAX_VALUE 2147483647}.
+     *     </li>
+     *     <li>
+     *         Both {@link IFluidTankProperties#canFill()} and {@link
+     *         IFluidTankProperties#canFillFluidType(FluidStack)} always return
+     *         {@code true}.
+     *     </li>
+     *     <li>
+     *         Both {@link IFluidTankProperties#canDrain()} and {@link
+     *         IFluidTankProperties#canDrainFluidType(FluidStack)} always return
+     *         {@code false}.
+     *     </li>
+     * </ul>
      *
-     * @return Empty array of IFluidTankProperties
+     * @return Array of IFluidTankProperties with length of one, which represents
+     *         the only (virtual) "tank" that this has.
      */
     @Override
     public IFluidTankProperties[] getTankProperties() {
-        return new IFluidTankProperties[0];
+        return TANK_PROPERTIES;
     }
 
     /**
