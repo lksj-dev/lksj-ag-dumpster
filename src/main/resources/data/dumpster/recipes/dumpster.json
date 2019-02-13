@@ -1,8 +1,9 @@
 {
-  "type": "forge:ore_shaped",
+  "type": "minecraft:crafting_shaped",
   "group": "dumpster:dumpster",
   "result": {
-    "item": "dumpster:dumpster"
+    "item": "dumpster:dumpster",
+    "count": 1
   },
   "pattern": [
     "XXX",
@@ -12,8 +13,7 @@
   "key": {
     "X": [
       {
-        "type": "forge:ore_dict",
-        "ore": "obsidian"
+        "item": "minecraft:obsidian"
       },
       {
         "item": "minecraft:black_glazed_terracotta"
@@ -22,16 +22,13 @@
         "item": "minecraft:coal_block"
       },
       {
-        "item": "minecraft:stained_hardened_clay",
-        "data": 15
+        "item": "minecraft:black_terracotta"
       },
       {
-        "item": "minecraft:concrete",
-        "data": 15
+        "item": "minecraft:black_concrete"
       },
       {
-        "item": "minecraft:wool",
-        "data": 15
+        "item": "minecraft:black_wool"
       }
     ],
     "O": {
