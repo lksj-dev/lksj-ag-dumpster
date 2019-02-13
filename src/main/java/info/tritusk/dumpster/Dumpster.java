@@ -1,66 +1,90 @@
 package info.tritusk.dumpster;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.item.TooltipOptions;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-
-import javax.annotation.Nullable;
+import net.minecraft.text.TextComponent;
+import net.minecraft.text.TranslatableTextComponent;
+import net.minecraft.world.BlockView;
 import java.util.List;
 
-public final class Dumpster extends Block {
+final class Dumpster extends Block implements BlockEntityProvider {
 
-    public Dumpster() {
-        super(Material.GLASS, MapColor.BLACK);
+    Dumpster(Settings settings) {
+        super(settings);
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void buildTooltip(ItemStack item, BlockView blockView, List<TextComponent> tooltip, TooltipOptions tooltipOptions) {
+        tooltip.add(new TranslatableTextComponent("block.dumpster.dumpster.tooltip.1"));
+        tooltip.add(new TranslatableTextComponent("block.dumpster.dumpster.tooltip.2"));
+        tooltip.add(new TranslatableTextComponent("block.dumpster.dumpster.tooltip.3"));
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(I18n.format("tile.dumpster.dumpster.tooltip.1"));
-        tooltip.add(I18n.format("tile.dumpster.dumpster.tooltip.2"));
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasBlockEntity() {
         return true;
     }
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public BlockEntity createBlockEntity(BlockView blockView) {
         return new Logic();
     }
 
-    static final class Logic extends TileEntity {
+    static final class Logic extends BlockEntity implements Inventory { // TODO (3TUSK): uh should we add liquid support???
 
-        @Override
-        public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-            return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
-                    capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY ||
-                    super.hasCapability(capability, facing);
+        static final BlockEntityType<Logic> TYPE_TOKEN = BlockEntityType.Builder.create(Logic::new).build(null);
+
+        Logic() {
+            super(TYPE_TOKEN);
         }
 
-        @Nullable
         @Override
-        public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-            if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-                return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(VoidingItemHandler.INSTANCE);
-            } else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-                return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(VoidingFluidHandler.INSTANCE);
-            } else {
-                return super.getCapability(capability, facing);
-            }
+        public int getInvSize() {
+            return 1;
+        }
+
+        @Override
+        public boolean isInvEmpty() {
+            return true; // Always.
+        }
+
+        @Override
+        public ItemStack getInvStack(int index) {
+            return ItemStack.EMPTY;
+        }
+
+        @Override
+        public ItemStack takeInvStack(int index, int takeCount) {
+            return ItemStack.EMPTY;
+        }
+
+        @Override
+        public ItemStack removeInvStack(int index) {
+            return ItemStack.EMPTY;
+        }
+
+        @Override
+        public void setInvStack(int index, ItemStack item) {
+            // No-op, because we eat everything
+        }
+
+        @Override
+        public boolean canPlayerUseInv(PlayerEntity player) {
+            return true;
+        }
+
+        @Override
+        public void clearInv() {
+            // No-op
         }
     }
 }

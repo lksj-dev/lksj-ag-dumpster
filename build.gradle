@@ -1,48 +1,32 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
+plugins {
+    id 'fabric-loom' version '0.2.0-SNAPSHOT'
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 version = "0.2.0"
 group = "info.tritusk.modpack.toolkit"
-archivesBaseName = "Dumpster"
+archivesBaseName = "Dumpster-Fabric"
 
 minecraft {
-    version = "1.12.2-14.23.5.2772"
-    runDir = "run"
-    
-    mappings = "stable_39"
+    // what?
+}
 
-    replace "@INJECT_VERSION@", project.version
+dependencies {
+    minecraft "com.mojang:minecraft:19w06a"
+    mappings "net.fabricmc:yarn:19w06a.6"
+    modCompile "net.fabricmc:fabric-loader:0.3.6.107"
+    // This one let us to have many useful stuff that we (however) don't even need at compile time
+    modCompile "net.fabricmc:fabric:0.2.0.92"
 }
 
 jar {
     manifest {
-        attributes 'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}"
-        attributes 'Timestamp': System.currentTimeMillis()
+        // what?
     }
 }
 
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        expand 'version':project.version
-    }
-        
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }

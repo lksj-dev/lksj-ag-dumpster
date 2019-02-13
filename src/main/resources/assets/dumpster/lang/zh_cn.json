@@ -1,0 +1,6 @@
+{
+  "block.dumpster.dumpster": "大号垃圾桶",
+  "block.dumpster.dumpster.tooltip.1": "像黑洞一样销毁物品和流体",
+  "block.dumpster.dumpster.tooltip.2": "警告：物品销毁后无法找回。",
+  "block.dumpster.dumpster.tooltip.3": "请谨慎操作。本警告仅此一次。"
+}

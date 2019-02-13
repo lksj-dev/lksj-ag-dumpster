@@ -1,0 +1,11 @@
+{
+  "id": "dumpster",
+  "name": "Dumpster",
+  "description": "Void unwanted stuff into black hole, in an efficient manner.",
+  "version": "0.2.0",
+  "side": "universal",
+  "initializer": "info.tritusk.dumpster.DumpsterMod",
+  "links" : "https://github.com/Team-AbCiv/Dumpster",
+  "authors": [ "3TUSK <tttusk@email.covertdragon.team>" ],
+  "license": "UNLICENSE"
+}
