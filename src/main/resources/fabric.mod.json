@@ -1,11 +1,35 @@
 {
+  "schemaVersion": 1,
   "id": "dumpster",
+  "version": "0.3.0",
   "name": "Dumpster",
   "description": "Void unwanted stuff into black hole, in an efficient manner.",
-  "version": "0.2.0",
-  "side": "universal",
-  "initializer": "info.tritusk.dumpster.DumpsterMod",
-  "links" : "https://github.com/Team-AbCiv/Dumpster",
-  "authors": [ "3TUSK <tttusk@email.covertdragon.team>" ],
-  "license": "UNLICENSE"
+  "authors": [
+    {
+      "name": "3TUSK",
+      "contact": {
+        "mail": "tttusk@email.covertdragon.team"
+      }
+    }
+  ],
+  "contributors": [
+    "Shnupbups"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Team-AbCiv/Dumpster",
+    "sources": "https://github.com/Team-AbCiv/Dumpster/tree/bleeding-fabric",
+    "issues": "https://github.com/Team-AbCiv/Dumpster/issues"
+  },
+  "license": "UNLICENSE",
+  "icon": "assets/dumpster/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "info.tritusk.dumpster.DumpsterMod"
+    ]
+  },
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  }
 }

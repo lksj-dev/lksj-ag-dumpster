@@ -6,12 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.item.TooltipOptions;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.TextComponent;
-import net.minecraft.text.TranslatableTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.BlockView;
 import java.util.List;
 
@@ -23,10 +23,10 @@ final class Dumpster extends Block implements BlockEntityProvider {
 
     @Environment(EnvType.CLIENT)
     @Override
-    public void buildTooltip(ItemStack item, BlockView blockView, List<TextComponent> tooltip, TooltipOptions tooltipOptions) {
-        tooltip.add(new TranslatableTextComponent("block.dumpster.dumpster.tooltip.1"));
-        tooltip.add(new TranslatableTextComponent("block.dumpster.dumpster.tooltip.2"));
-        tooltip.add(new TranslatableTextComponent("block.dumpster.dumpster.tooltip.3"));
+    public void buildTooltip(ItemStack item, BlockView blockView, List<Component> tooltip, TooltipContext tooltipContext) {
+        tooltip.add(new TranslatableComponent("block.dumpster.dumpster.tooltip.1"));
+        tooltip.add(new TranslatableComponent("block.dumpster.dumpster.tooltip.2"));
+        tooltip.add(new TranslatableComponent("block.dumpster.dumpster.tooltip.3"));
     }
 
     @Override
@@ -83,7 +83,7 @@ final class Dumpster extends Block implements BlockEntityProvider {
         }
 
         @Override
-        public void clearInv() {
+        public void clear() {
             // No-op
         }
     }
