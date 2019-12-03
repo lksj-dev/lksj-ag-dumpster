@@ -12,12 +12,12 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "0.2.0"
+version = "0.2.1"
 group = "info.tritusk.modpack.toolkit"
 archivesBaseName = "Dumpster"
 
 minecraft {
-    version = "1.12.2-14.23.5.2772"
+    version = "1.12.2-14.23.5.2836"
     runDir = "run"
     
     mappings = "stable_39"
@@ -34,7 +34,6 @@ jar {
 
 processResources {
     inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'

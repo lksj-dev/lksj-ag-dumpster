@@ -42,7 +42,7 @@ public final class Dumpster extends Block {
         return new Logic();
     }
 
-    static final class Logic extends TileEntity {
+    public static final class Logic extends TileEntity {
 
         @Override
         public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
