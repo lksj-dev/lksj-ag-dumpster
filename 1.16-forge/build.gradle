@@ -1,0 +1,47 @@
+plugins {
+    id 'dev.architectury.loom' version '1.5.391'
+    id "maven-publish"
+}
+
+platformInfo {
+    minecraftVersion = '1.16.5'
+    platform = 'Forge'
+    supportedMinecraftVersions = [ '1.16', '1.16.1', '1.16.2', '1.16.3', '1.16.4', '1.16.5' ]
+}
+
+loom {
+    silentMojangMappingsLicense()
+
+    runs {
+        client {
+            runDir './run-client'
+        }
+        server {
+            runDir './run-server'
+        }
+        configureEach {
+            ideConfigGenerated(true)
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.16.5"
+    mappings loom.officialMojangMappings()
+    forge "net.minecraftforge:forge:1.16.5-36.2.39"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 8
+}
+
+processResources {
+    // define properties that can be used during resource processing
+    inputs.property "version", project.version
+
+    // this will replace the property "${version}" in your mods.toml
+    // with the version you've defined in your gradle.properties
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}

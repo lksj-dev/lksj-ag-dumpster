@@ -49,5 +49,6 @@ pluginManagement {
 rootProject.name = 'Dumpster'
 
 // TODO backports
+include('1.16-forge')
 include('1.21-fabric'  , '1.21-forge'  , '1.21-neoforge'  )
 
