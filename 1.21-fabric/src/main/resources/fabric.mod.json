@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "dumpster",
+  "version": "${version}",
+  "name": "Dumpster",
+  "description": "Void things like a black hole",
+  "authors": [ "3TUSK" ],
+  "contact": {},
+  "license": "Unlicense",
+  "entrypoints": {
+    "main": [ "info.tritusk.modpack.dumpster.fabric.FabricEntryPoint" ]
+  },
+  "depends": {
+    "minecraft": [ "1.21.*" ]
+  }
+}

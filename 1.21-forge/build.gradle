@@ -1,0 +1,52 @@
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '6.0.25'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+platformInfo {
+    minecraftVersion = '1.21'
+    platform = 'Forge'
+    supportedMinecraftVersions = [ '1.21' ]
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.21'
+
+    runs {
+        client {
+            workingDirectory file('./run-client')
+            property 'forge.logging.console.level', 'info'
+            property 'fml.earlyprogresswindow', 'false'
+            ideaModule "${rootProject.name}.${project.name}.main"
+            mods {
+                dumpster {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory file('./run-server')
+            property 'forge.logging.console.level', 'info'
+            property 'fml.earlyprogresswindow', 'false'
+            ideaModule "${rootProject.name}.${project.name}.main"
+            mods {
+                dumpster {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.21-51.0.8"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+

@@ -1,0 +1,6 @@
+{
+  "model": "minecraft:cube_all",
+  "textures": {
+    "all": "minecraft:entity/end_portal"
+  }
+}

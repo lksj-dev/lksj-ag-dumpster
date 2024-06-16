@@ -1,0 +1,30 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.0.142'
+}
+
+platformInfo {
+    minecraftVersion = '1.21'
+    platform = 'NeoForge'
+    supportedMinecraftVersions = [ '1.21' ]
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+runs {
+    client {
+        modSource project.sourceSets.main
+    }
+
+    server {
+        modSource project.sourceSets.main
+        programArgument '--nogui'
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:21.0.11-beta"
+}

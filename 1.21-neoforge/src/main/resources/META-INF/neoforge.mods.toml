@@ -1,0 +1,18 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="Unlicense"
+issueTrackerURL="https://example.invalid/"
+displayTest="IGNORE_ALL_VERSION"
+
+[[mods]]
+modId="dumpster"
+version="${file.jarVersion}"
+displayName="Dumpster"
+description="Void unwanted stuff into black hole efficiently."
+authors="3TUSK"
+credits="/u/wormzjl for his requests of making this thing"
+
+[[dependencies.dumpster]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.21,1.22)"

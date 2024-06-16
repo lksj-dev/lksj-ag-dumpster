@@ -1,0 +1,51 @@
+plugins {
+    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'io.github.juuxel.loom-quiltflower' version '1.7.1'
+}
+
+platformInfo {
+    minecraftVersion = '1.21'
+    platform = 'Fabric'
+    supportedMinecraftVersions = [ '1.21' ]
+}
+
+loom {
+    runs {
+        client {
+            runDir './run-client'
+        }
+
+        server {
+            runDir './run-server'
+        }
+
+        configureEach {
+            ideConfigGenerated = true
+        }
+    }
+}
+
+repositories {
+    maven {
+        // ModMenu
+        name = 'TerraformerMC'
+        url = 'https://maven.terraformersmc.com/releases/'
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.21"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:0.15.11"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.1+1.21"
+
+    // Need this to tell me what mods are present at runtime
+    modRuntimeOnly(group: 'com.terraformersmc', name: 'modmenu', version: '8.0.1') {
+        exclude group: 'net.fabricmc'
+        exclude group: 'net.fabricmc.fabric-api'
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
